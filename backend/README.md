@@ -4,6 +4,7 @@
 
 - Python **3.14.0 ou superior**
 - Pip atualizado
+- Docker Desktop instalado para uso em containers
 
 Verifique sua versao do Python:
 
@@ -11,47 +12,58 @@ Verifique sua versao do Python:
 python --version
 ```
 
-Caso a versao seja inferior a 3.14.0, atualize o Python antes de prosseguir.
-
 ## Setup local
 
-1. Criar o arquivo de variaveis de ambiente:
+1. Copie o arquivo de ambiente:
 
 ```powershell
 Copy-Item .env.example .env
 ```
 
-2. Criar ambiente virtual:
+2. Crie e ative o ambiente virtual:
 
 ```powershell
 python -m venv .venv
-```
-
-3. Ativar ambiente virtual (PowerShell):
-
-```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-4. Atualizar o pip:
+3. Atualize o pip:
 
 ```powershell
 python -m pip install --upgrade pip
 ```
 
-5. Instalar dependencias:
+4. Instale as dependencias:
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-6. Rodar a API:
+5. Rode a API:
 
 ```powershell
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
+6. Acesse:
+
+- `http://localhost:8000`
+- `http://localhost:8000/docs`
+- `http://localhost:8000/health`
+
+## Variaveis de ambiente
+
+O backend usa a variavel:
+
+```env
+FRONTEND_URL=http://localhost:3000
+```
+
+Esta variavel e usada para configurar o CORS.
+
 ## Docker
+
+### Usando Docker Compose
 
 Na raiz do projeto, execute:
 
@@ -59,17 +71,31 @@ Na raiz do projeto, execute:
 docker compose up --build backend
 ```
 
-Ou suba toda a aplicacao:
+Ou inicie toda a aplicacao:
 
 ```powershell
 docker compose up --build
 ```
 
+### Alternativa direta no backend
+
+Se preferir iniciar apenas o container do backend:
+
+```powershell
+docker build -t desafio-backend .
+
+docker run --rm -p 8000:8000 -e FRONTEND_URL=http://localhost:3000 desafio-backend
+```
+
 ## Endpoints
 
-- GET `/api/contatos`
-- POST `/api/auth/google`
-- GET `/health`
-- GET `/docs`
+- `GET /api/contatos`
+- `POST /api/auth/google`
+- `GET /health`
+- `GET /docs`
 
-> **Importante:** Este projeto requer **Python 3.14.0 ou superior**.
+## Solucao de problemas Docker
+
+- Se o comando `docker compose` nao for reconhecido, instale ou atualize o Docker Desktop.
+- Se a porta `8000` estiver ocupada, pare o servico que estiver usando ela ou altere o mapeamento de portas.
+- Se o backend nao conseguir ler variaveis de ambiente, certifique-se de ter criado `.env` a partir de `.env.example`.

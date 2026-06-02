@@ -7,20 +7,23 @@ Projeto dividido em duas partes:
 
 ## Executar com Docker
 
-Na raiz do projeto, execute:
+1. Certifique-se de ter o Docker instalado e rodando.
+2. Na raiz do projeto, execute:
 
 ```powershell
-docker compose up --build
+docker compose up -d --build
 ```
 
-Depois acesse:
+3. Aguarde a construção e o start dos containers.
+
+Acesse:
 
 - Frontend: `http://localhost:3000`
 - Backend: `http://localhost:8000`
 - Documentacao da API: `http://localhost:8000/docs`
 - Health check: `http://localhost:8000/health`
 
-Para parar os containers:
+Para parar e remover os containers:
 
 ```powershell
 docker compose down
@@ -35,3 +38,9 @@ Por padrao, os servicos usam as seguintes URLs:
 
 - Backend: `http://localhost:8000`
 - Frontend: `http://localhost:3000`
+
+## Solucao de problemas Docker
+
+- Se o comando `docker compose` nao for reconhecido, verifique se o Docker Desktop esta instalado corretamente.
+- Se o backend nao iniciar, verifique se a porta `8000` esta livre.
+- Se o frontend nao carregar, verifique se o backend esta ativo e se a variavel `NEXT_PUBLIC_API_URL` esta apontando para `http://localhost:8000`.
