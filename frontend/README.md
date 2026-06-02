@@ -19,7 +19,7 @@ npm --version
 
 Caso a versao do Node.js seja inferior a 20, atualize o Node antes de prosseguir.
 
-## Setup
+## Setup local
 
 1. Instalar dependencias:
 
@@ -49,6 +49,20 @@ npm run dev
 
 ```text
 http://localhost:3000
+```
+
+## Docker
+
+Na raiz do projeto, execute:
+
+```powershell
+docker compose up --build frontend
+```
+
+Ou suba toda a aplicacao:
+
+```powershell
+docker compose up --build
 ```
 
 ## Scripts

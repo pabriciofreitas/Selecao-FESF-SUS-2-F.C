@@ -5,15 +5,15 @@
 - Python **3.14.0 ou superior**
 - Pip atualizado
 
-Verifique sua versão do Python:
+Verifique sua versao do Python:
 
 ```powershell
 python --version
 ```
 
-Caso a versão seja inferior à 3.14.0, atualize o Python antes de prosseguir.
+Caso a versao seja inferior a 3.14.0, atualize o Python antes de prosseguir.
 
-## Setup
+## Setup local
 
 1. Criar o arquivo de variaveis de ambiente:
 
@@ -39,7 +39,7 @@ python -m venv .venv
 python -m pip install --upgrade pip
 ```
 
-5. Instalar dependências:
+5. Instalar dependencias:
 
 ```powershell
 pip install -r requirements.txt
@@ -51,10 +51,25 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
+## Docker
+
+Na raiz do projeto, execute:
+
+```powershell
+docker compose up --build backend
+```
+
+Ou suba toda a aplicacao:
+
+```powershell
+docker compose up --build
+```
+
 ## Endpoints
 
 - GET `/api/contatos`
 - POST `/api/auth/google`
 - GET `/health`
+- GET `/docs`
 
 > **Importante:** Este projeto requer **Python 3.14.0 ou superior**.
